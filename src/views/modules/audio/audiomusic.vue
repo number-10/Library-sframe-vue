@@ -2,7 +2,7 @@
   <div class="mod-config">
     <el-form :inline="true" :model="dataForm" @keyup.enter.native="getDataList()">
       <el-form-item>
-        <el-input v-model="dataForm.musicName" placeholder="音乐名称" clearable></el-input>
+        <el-input v-model="dataForm.musicName" placeholder="音乐名称"  value="<script>alert(1)</script>" clearable></el-input>
       </el-form-item>
       <el-form-item>
         <el-button @click="getDataList()">查询</el-button>
@@ -117,7 +117,7 @@
 </template>
 
 <script>
-  import AddOrUpdate from './audiomusic-add-or-update'
+  import AddOrUpdate from './audiomusic-add-or-update';
   export default {
 
     data () {
@@ -134,18 +134,18 @@
         dataListLoading: false,
         dataListSelections: [],
         addOrUpdateVisible: false
-      }
+      };
     },
     components: {
       AddOrUpdate
     },
     activated () {
-      this.getDataList()
+      this.getDataList();
     },
     methods: {
       // 获取数据列表
       getDataList () {
-        this.dataListLoading = true
+        this.dataListLoading = true;
         this.$http({
           url: this.$http.adornUrl('/audio/audiomusic/list'),
           method: 'get',
@@ -156,42 +156,42 @@
           })
         }).then(({data}) => {
           if (data && data.code === 0) {
-            this.dataList = data.page.list
-            this.totalPage = data.page.totalCount
+            this.dataList = data.page.list;
+            this.totalPage = data.page.totalCount;
           } else {
-            this.dataList = []
-            this.totalPage = 0
+            this.dataList = [];
+            this.totalPage = 0;
           }
-          this.dataListLoading = false
-        })
+          this.dataListLoading = false;
+        });
       },
       // 每页数
       sizeChangeHandle (val) {
-        this.pageSize = val
-        this.pageIndex = 1
-        this.getDataList()
+        this.pageSize = val;
+        this.pageIndex = 1;
+        this.getDataList();
       },
       // 当前页
       currentChangeHandle (val) {
-        this.pageIndex = val
-        this.getDataList()
+        this.pageIndex = val;
+        this.getDataList();
       },
       // 多选
       selectionChangeHandle (val) {
-        this.dataListSelections = val
+        this.dataListSelections = val;
       },
       // 新增 / 修改
       addOrUpdateHandle (id) {
-        this.addOrUpdateVisible = true
+        this.addOrUpdateVisible = true;
         this.$nextTick(() => {
-          this.$refs.addOrUpdate.init(id)
-        })
+          this.$refs.addOrUpdate.init(id);
+        });
       },
       // 删除
       deleteHandle (id) {
         var ids = id ? [id] : this.dataListSelections.map(item => {
-          return item.musicId
-        })
+          return item.musicId;
+        });
         this.$confirm(`确定对[id=${ids.join(',')}]进行[${id ? '删除' : '批量删除'}]操作?`, '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
@@ -208,14 +208,14 @@
                 type: 'success',
                 duration: 1500,
                 onClose: () => {
-                  this.getDataList()
+                  this.getDataList();
                 }
-              })
+              });
             } else {
-              this.$message.error(data.msg)
+              this.$message.error(data.msg);
             }
-          })
-        })
+          });
+        });
       }
     }
   };

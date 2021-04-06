@@ -8,7 +8,10 @@
   // api接口请求地址
 //  window.SITE_CONFIG['baseUrl'] = 'http://localhost:9001/renren-fast';
 
-  window.SITE_CONFIG['baseUrl'] = 'http://www.number10.cn:9001/renren-fast';
+  //window.SITE_CONFIG['baseUrl'] = 'http://www.number10.cn:9001/renren-fast';
+
+
+  window.SITE_CONFIG['baseUrl'] = 'http://localhost:19001/base';
 
   // cdn地址 = 域名 + 版本号
   window.SITE_CONFIG['domain']  = './'; // 域名

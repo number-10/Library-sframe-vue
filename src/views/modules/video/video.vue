@@ -2,7 +2,7 @@
   <div class="mod-config">
     <el-form :inline="true" :model="dataForm" @keyup.enter.native="getDataList()">
       <el-form-item>
-        <el-input v-model="dataForm.videoName" placeholder="视频名称" clearable></el-input>
+        <el-input v-model="dataForm.videoName" placeholder="视频名称"   clearable></el-input>
         <el-input v-model="dataForm.typeTag" placeholder="等级" clearable></el-input>
       </el-form-item>
       <el-form-item>
@@ -149,12 +149,14 @@
         this.dataListLoading = true
         this.$http({
           url: this.$http.adornUrl('/video/video/list'),
-          method: 'get',
-          params: this.$http.adornParams({
-            'page': this.pageIndex,
-            'limit': this.pageSize,
-            'videoName': this.dataForm.videoName,
-            'typeTag': this.dataForm.typeTag
+          method: 'post',
+          data: this.$http.adornData({
+              'pageParam': {
+                'page': this.pageIndex,
+                'limit': this.pageSize
+              },
+              'videoName': this.dataForm.videoName,
+              'typeTag': this.dataForm.typeTag
           })
         }).then(({data}) => {
           if (data && data.code === 0) {
