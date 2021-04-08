@@ -17,7 +17,7 @@ const _import = require('./import-' + process.env.NODE_ENV)
 
 // 全局路由(无需嵌套上左右整体布局)
 const globalRoutes = [
-  { path: '/file-upload', component: _import('modules/file/file-upload'), name: 'file-upload', meta: { title: '上传文件' } },
+  { path: '/', component: _import('modules/file/file-upload'), name: 'file-upload', meta: { title: '上传文件' } },
   { path: '/404', component: _import('common/404'), name: '404', meta: { title: '404未找到' } },
   { path: '/login', component: _import('common/login'), name: 'login', meta: { title: '登录' } }
 ]
@@ -38,12 +38,12 @@ const mainRoutes = {
     { path: '/theme', component: _import('common/theme'), name: 'theme', meta: { title: '主题' } },
     { path: '/demo-echarts', component: _import('demo/echarts'), name: 'demo-echarts', meta: { title: 'demo-echarts', isTab: true } },
     { path: '/demo-ueditor', component: _import('demo/ueditor'), name: 'demo-ueditor', meta: { title: 'demo-ueditor', isTab: true } }
-  ],
+  ]
 
-  beforeEnter (to, from, next) {
+  /*beforeEnter (to, from, next) {
     next({ name: 'file-upload' });
 
-  }
+  }*/
   /*
   beforeEnter (to, from, next) {
     let token = Vue.cookie.get('token')
@@ -65,13 +65,13 @@ router.beforeEach((to, from, next) => {
   // 添加动态(菜单)路由
   // 1. 已经添加 or 全局路由, 直接访问
   // 2. 获取菜单列表, 添加并保存本地存储
-
-  if (true) {
+  next();
+  /*if (true) {
     next();
   } else {
     console.log(`%c file-upload in router`, 'color:blue')
     router.push({ name: 'file-upload' });
-  };
+  };*/
 })
 
 /*
